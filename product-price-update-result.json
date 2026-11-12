@@ -1,0 +1,30 @@
+{
+  "products": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "RedRevive Con · 250 ml",
+      "previousPrice": 39,
+      "price": 75
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "name": "RedRevive Con · 500 ml",
+      "previousPrice": 69,
+      "price": 150
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "name": "RedRevive Pro · 1 L",
+      "previousPrice": 119,
+      "price": 300
+    }
+  ],
+  "publicCatalogVerified": true,
+  "individualQuotesVerified": true,
+  "combinedQuote": {
+    "total": 525,
+    "discount": 0,
+    "subtotal": 525,
+    "delivery_fee": 0
+  }
+}

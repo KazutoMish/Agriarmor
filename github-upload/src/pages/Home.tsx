@@ -1,0 +1,23 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowUpRight, ChevronDown, Droplets, Leaf, MapPin, Recycle, Sprout } from 'lucide-react';
+
+export default function Home() {
+  return <>
+    <section className="hero hero-with-photo"><div className="hero-copy"><div className="eyebrow"><span className="live-dot" /> ROOTED IN NATURE. READY FOR RUST.</div><h1>A fresh start<br />for <em>rusty things.</em><span className="hero-heading-dot">✳</span></h1><p>Meet RedRevive. The tomato & kamias-based rust removal gel that gives your metal a second chance—and our harvest a new purpose.</p><div className="hero-actions"><Link className="button" to="/products">Order Now <ArrowUpRight size={18} /></Link><Link className="text-link" to="/our-story">A little more about us <ArrowRight size={16} /></Link></div><div className="hero-origin"><span className="origin-icon"><Sprout size={23} /></span><span><strong>Grown from a good idea.</strong><small>Proudly made in the Philippines.</small></span><span className="origin-line" /><span className="hero-starting">A fresh start from <strong>₱75</strong></span></div></div>
+      <div className="hero-art hero-photo">
+        <img src="/assets/redrevive-home-hd.png" alt="AgriArmor RedRevive rust remover made from surplus tomatoes, pictured with tomatoes and a wrench." width="1672" height="941" fetchPriority="high" />
+      </div>
+    </section>
+    <div className="benefit-band"><span><Leaf />Tomato & kamias based</span><i /><span><Droplets />Gel that stays where it’s needed</span><i /><span><Recycle />A second life for surplus crops</span><i /><span><MapPin />Locally made. Thoughtfully created.</span></div>
+    <section className="community-section"><div><p className="eyebrow">FRESH STARTS, SHARED.</p><h2>Your next revival<br />could be <em>someone’s inspiration.</em></h2><p>Restoring a favorite tool? Giving the workshop a refresh?<br />We’d love to see what you bring back to life.</p><a className="button button-light" href="mailto:info.agriarmor@gmail.com?subject=My%20RedRevive%20story">Share your RedRevive story <ArrowUpRight size={17} /></a></div><div className="community-card"><span className="quote-mark">“</span><p>A well-loved tool.<br />A little patience.<br /><em>A fresh beginning.</em></p><div><span className="community-avatar"><Sprout size={23} /></span><span>The next chapter is yours.<small>Customer stories coming soon.</small></span></div></div></section>
+    <section className="section faq-section" id="faq"><div><p className="eyebrow">A FEW THINGS YOU MIGHT BE WONDERING</p><h2>Fresh questions.<br /><em>Simple answers.</em></h2><p>Still curious? We’re just a message away.</p><a className="text-link" href="mailto:info.agriarmor@gmail.com">Let’s talk <ArrowUpRight size={16} /></a></div><div className="faq-list">{[
+      ['What exactly is RedRevive?', 'RedRevive is a bio-based rust removal gel made with surplus tomatoes and kamias. Its gel consistency helps it stay in place on the metal surface while you work.'],
+      ['Where can I use it?', 'The product guide lists carbon steel, cast iron, wrought iron, and stainless steel. Test a small hidden area first, especially on aluminum, brass, copper, and painted finishes. Follow all label instructions.'],
+      ['How do I order and pay?', 'Choose your size, add it to your cart, and check out. Pay by cash on delivery, GCash, bank transfer, or on pickup. There’s no online payment gateway. Transfer details are shared in checkout when configured, or confirmed by our team.'],
+      ['Do you offer delivery and pickup?', 'Yes. Delivery is ₱60, or free when your order after discounts reaches ₱499. Pickup is free from Brgy. Fatima III, San Jose del Monte, Bulacan. Our team confirms your preferred schedule.'],
+      ['How can I check my order?', 'Visit Track order and enter your order number and the phone number you used at checkout. You’ll see your order’s current status without creating an account.'],
+      ['Can I order for my business?', 'Absolutely. Our 1 L RedRevive Pro is a good place to start. For larger quantities, stock questions, or farming partnerships, email info.agriarmor@gmail.com.'],
+    ].map(([question,answer]) => <details key={question}><summary>{question}<ChevronDown size={17} /></summary><p>{answer}</p></details>)}</div></section>
+    <section className="closing-section"><span className="closing-flower">✳</span><div><p className="eyebrow">YOUR METAL’S NEXT CHAPTER STARTS HERE.</p><h2>A little red. <em>A fresh start.</em></h2></div><Link className="button" to="/products">Find your RedRevive <ArrowUpRight size={17} /></Link></section>
+  </>;
+}

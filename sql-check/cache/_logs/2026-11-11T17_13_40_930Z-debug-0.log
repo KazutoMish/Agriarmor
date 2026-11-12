@@ -1,0 +1,56 @@
+0 verbose cli C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node.exe C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.19.1
+2 info using node@v24.22.3
+3 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\sql-check\.npmrc
+5 silly config load:file:C:\Users\quiro\.npmrc
+6 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\sql-check\etc\npmrc
+7 verbose title npm install @electric-sql/pglite
+8 verbose argv "install" "--prefix" ".tools/sql-check" "--cache" ".tools/sql-check/cache" "--no-save" "--ignore-scripts" "--no-fund" "--no-audit" "--fetch-retries" "0" "--fetch-timeout" "20000" "--loglevel" "info" "@electric-sql/pglite"
+9 verbose logfile logs-max:10 dir:C:\Users\quiro\OneDrive\html\.tools\sql-check\cache\_logs\2026-11-11T17_13_40_930Z-
+10 verbose logfile C:\Users\quiro\OneDrive\html\.tools\sql-check\cache\_logs\2026-11-11T17_13_40_930Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly install-scripts no package.json at prefix Could not read package.json: Error: ENOENT: no such file or directory, open 'C:\Users\quiro\OneDrive\html\.tools\sql-check\package.json'
+13 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+14 http fetch GET https://registry.npmjs.org/npm attempt 1 failed with EACCES
+15 silly idealTree buildDeps
+16 silly fetch manifest @electric-sql/pglite@*
+17 silly packumentCache full:https://registry.npmjs.org/@electric-sql%2fpglite cache-miss
+18 http fetch GET https://registry.npmjs.org/@electric-sql%2fpglite attempt 1 failed with EACCES
+19 silly placeDep ROOT @electric-sql/pglite@ OK for:  want: *
+20 verbose type system
+21 verbose stack FetchError: request to https://registry.npmjs.org/@electric-sql%2fpglite failed, reason: 
+21 verbose stack     at ClientRequest.<anonymous> (C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node_modules\npm\node_modules\minipass-fetch\lib\index.js:130:14)
+21 verbose stack     at ClientRequest.emit (node:events:514:28)
+21 verbose stack     at emitErrorEvent (node:_http_client:114:11)
+21 verbose stack     at _destroy (node:_http_client:1175:9)
+21 verbose stack     at onSocketNT (node:_http_client:1196:5)
+21 verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:91:21)
+22 error code EACCES
+23 error errno EACCES
+24 error FetchError: request to https://registry.npmjs.org/@electric-sql%2fpglite failed, reason: 
+24 error     at ClientRequest.<anonymous> (C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node_modules\npm\node_modules\minipass-fetch\lib\index.js:130:14)
+24 error     at ClientRequest.emit (node:events:514:28)
+24 error     at emitErrorEvent (node:_http_client:114:11)
+24 error     at _destroy (node:_http_client:1175:9)
+24 error     at onSocketNT (node:_http_client:1196:5)
+24 error     at process.processTicksAndRejections (node:internal/process/task_queues:91:21) {
+24 error   code: 'EACCES',
+24 error   errno: 'EACCES',
+24 error   type: 'system',
+24 error   requiredBy: '.'
+24 error }
+25 error
+25 error The operation was rejected by your operating system.
+25 error It's possible that the file was already in use (by a text editor or antivirus), or that you lack permissions to access it.
+25 error
+25 error If you believe this might be a permissions issue, please double-check the permissions of the file and its containing directories, or try running the command again as root/Administrator.
+26 silly unfinished npm timer reify 1794417224355
+27 silly unfinished npm timer reify:loadTrees 1794417224375
+28 verbose cwd C:\Users\quiro\OneDrive\html
+29 verbose os Windows_NT 10.0.26200
+30 verbose node v24.22.3
+31 verbose npm  v11.19.1
+32 verbose exit 1
+33 verbose code 1
+34 error A complete log of this run can be found in: C:\Users\quiro\OneDrive\html\.tools\sql-check\cache\_logs\2026-11-11T17_13_40_930Z-debug-0.log

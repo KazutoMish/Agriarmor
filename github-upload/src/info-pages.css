@@ -1,0 +1,73 @@
+.info-page .info-page-heading {
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.info-page .story-section {
+  margin-top: 0;
+  padding-bottom: 60px;
+}
+
+.info-page .how-section {
+  padding-top: 0;
+}
+
+.how-guide-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 40px;
+  margin-top: 36px;
+}
+
+.how-process-image {
+  display: block;
+}
+
+.how-process-image img {
+  width: 100%;
+  height: auto;
+}
+
+.how-instructions {
+  min-width: 0;
+}
+
+.how-instructions .steps-grid {
+  grid-template-columns: 1fr;
+  gap: 22px;
+  margin-top: 0;
+}
+
+.how-instructions .steps-grid p {
+  font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+  .how-guide-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .how-instructions .steps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .how-guide-layout {
+    margin-top: 24px;
+  }
+
+  .how-instructions .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keep every page link available between the desktop and mobile layouts. */
+@media (min-width: 701px) and (max-width: 900px) {
+  .navigation > a:nth-child(3),
+  .navigation > a:nth-child(4) {
+    display: block;
+  }
+}

@@ -1,0 +1,31 @@
+0 verbose cli C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node.exe C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.19.1
+2 info using node@v24.22.3
+3 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\node-native\node-v24.22.3-win-x64\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\sql-check\.npmrc
+5 silly config load:file:C:\Users\quiro\.npmrc
+6 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\sql-check\etc\npmrc
+7 verbose title npm install @electric-sql/pglite
+8 verbose argv "install" "--prefix" ".tools/sql-check" "--cache" ".tools/sql-check/cache" "--no-save" "--ignore-scripts" "--no-fund" "--no-audit" "--fetch-retries" "0" "--fetch-timeout" "30000" "@electric-sql/pglite"
+9 verbose logfile logs-max:10 dir:C:\Users\quiro\OneDrive\html\.tools\sql-check\cache\_logs\2026-11-11T17_14_00_693Z-
+10 verbose logfile C:\Users\quiro\OneDrive\html\.tools\sql-check\cache\_logs\2026-11-11T17_14_00_693Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly install-scripts no package.json at prefix Could not read package.json: Error: ENOENT: no such file or directory, open 'C:\Users\quiro\OneDrive\html\.tools\sql-check\package.json'
+13 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+14 silly idealTree buildDeps
+15 silly fetch manifest @electric-sql/pglite@*
+16 silly packumentCache full:https://registry.npmjs.org/@electric-sql%2fpglite cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/@electric-sql%2fpglite 1052ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/@electric-sql%2fpglite set size:undefined disposed:false
+19 silly placeDep ROOT @electric-sql/pglite@0.5.16 OK for:  want: *
+20 silly reify moves {}
+21 http cache @electric-sql/pglite@https://registry.npmjs.org/@electric-sql/pglite/-/pglite-0.5.16.tgz 0ms (cache hit)
+22 silly tarball no local data for @electric-sql/pglite@https://registry.npmjs.org/@electric-sql/pglite/-/pglite-0.5.16.tgz. Extracting by manifest.
+23 http fetch GET 200 https://registry.npmjs.org/@electric-sql/pglite/-/pglite-0.5.16.tgz 63397ms (cache miss)
+24 silly ADD node_modules/@electric-sql/pglite
+25 verbose cwd C:\Users\quiro\OneDrive\html
+26 verbose os Windows_NT 10.0.26200
+27 verbose node v24.22.3
+28 verbose npm  v11.19.1
+29 verbose exit 0
+30 info ok

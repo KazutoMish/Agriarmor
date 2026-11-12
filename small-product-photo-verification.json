@@ -1,0 +1,126 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "path": "/products",
+      "size": "250ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 1440,
+      "path": "/products",
+      "size": "500ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 1440,
+      "path": "/cart",
+      "size": "250ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 1440,
+      "path": "/cart",
+      "size": "500ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 1440,
+      "path": "/checkout",
+      "size": "250ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 1440,
+      "path": "/checkout",
+      "size": "500ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/products",
+      "size": "250ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/products",
+      "size": "500ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/cart",
+      "size": "250ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/cart",
+      "size": "500ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/checkout",
+      "size": "250ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/checkout",
+      "size": "500ml",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    }
+  ],
+  "localFallbackVerified": true,
+  "orderAttempts": 0
+}

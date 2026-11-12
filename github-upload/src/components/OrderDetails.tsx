@@ -1,0 +1,21 @@
+import { useState } from 'react';
+import { Check, ImagePlus, LoaderCircle, PackageCheck } from 'lucide-react';
+import { formatDate, formatMoney, paymentLabel, statusLabel, errorMessage } from '../lib/utils';
+import { proofSchema } from '../lib/validation';
+import { uploadProof } from '../lib/api';
+import type { Order } from '../types';
+
+export default function OrderDetails({ order, phone, allowProof = true }: { order: Order; phone: string; allowProof?: boolean }) {
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+  const [received, setReceived] = useState(Boolean(order.has_payment_proof));
+  const statuses = ['pending','confirmed','preparing',order.fulfillment_type === 'pickup' ? 'ready' : 'out_for_delivery','completed'];
+  async function attach(file: File | undefined) {
+    if (!file) return;
+    const result = proofSchema.safeParse(file);
+    if (!result.success) { setMessage(result.error.issues[0].message); return; }
+    setBusy(true); setMessage('');
+    try { await uploadProof(order, phone, file); setReceived(true); setMessage('Your receipt is uploaded. Our team will verify your transfer.'); } catch(e) { setMessage(errorMessage(e)); } finally { setBusy(false); }
+  }
+  return <div className="order-details"><section className="panel tracking-panel"><div className="order-id"><span><PackageCheck size={23} /><strong>{order.order_number}</strong></span><span className={`status-badge status-${order.status}`}>{statusLabel(order.status)}</span></div><p className="fine-print">Placed {formatDate(order.created_at)}</p>{order.status !== 'cancelled' ? <ol className="status-timeline">{statuses.map((status,i) => <li key={status} className={i <= statuses.indexOf(order.status) ? 'reached' : ''}><span>{i < statuses.indexOf(order.status) ? <Check size={14} /> : i + 1}</span><small>{statusLabel(status)}</small></li>)}</ol> : <p className="info-banner">This order has been cancelled. Contact us if you need help with an offline payment.</p>}<div className="order-detail-grid"><div><span className="eyebrow">{order.fulfillment_type === 'delivery' ? 'DELIVERY' : 'PICKUP'}</span><p>{order.fulfillment_type === 'delivery' ? order.address : 'Brgy. Fatima III, San Jose del Monte, Bulacan'}</p><small>Preferred schedule: {formatDate(order.scheduled_at)}</small></div><div><span className="eyebrow">PAYMENT METHOD</span><p>{paymentLabel(order.payment_method)}</p>{order.payment_reference && <small>Reference: {order.payment_reference}</small>}<small>Offline payments are verified by our team.</small></div></div></section><section className="panel form-section"><h2>A little look at your order</h2>{(order.order_items || []).map((item,i) => <div className="summary-row" key={item.id || i}><span>{item.name_snapshot} <small>× {item.quantity}</small></span><span>{formatMoney(item.price_snapshot * item.quantity)}</span></div>)}<div className="summary-row"><span>Subtotal</span><span>{formatMoney(order.subtotal)}</span></div>{order.discount > 0 && <div className="summary-row discount"><span>Discount</span><span>−{formatMoney(order.discount)}</span></div>}<div className="summary-row"><span>{order.fulfillment_type === 'pickup' ? 'Pickup' : 'Delivery'}</span><span>{order.delivery_fee ? formatMoney(order.delivery_fee) : 'Free'}</span></div><div className="summary-row total"><span>Total</span><span>{formatMoney(order.total)}</span></div></section>{received && <p className="info-banner" role="status">Payment receipt received. Our team will verify the transfer.</p>}{allowProof && !received && ['gcash','bank_transfer'].includes(order.payment_method) && !['cancelled','completed'].includes(order.status) && <section className="panel form-section"><h2>A receipt for your records</h2><p className="fine-print">You can attach your transfer receipt now or come back later. Transfers are checked manually.</p><label className="upload-field">{busy ? <LoaderCircle className="spin" /> : <ImagePlus />}<strong>{busy ? 'Uploading your receipt…' : 'Upload a payment receipt'}</strong><small>JPG, PNG, WebP · Up to 5 MB</small><input type="file" accept="image/jpeg,image/png,image/webp" disabled={busy} onChange={e => void attach(e.target.files?.[0])} /></label>{message && <p role="status" className="info-banner">{message}</p>}</section>}</div>;
+}

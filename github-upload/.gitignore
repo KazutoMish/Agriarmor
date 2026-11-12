@@ -1,0 +1,9 @@
+.tools/
+python-runtime.zip
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+coverage/

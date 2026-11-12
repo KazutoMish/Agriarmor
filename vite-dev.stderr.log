@@ -1,0 +1,7 @@
+The request url "C:\Users\quiro\OneDrive\html\.env.server.local" is outside of Vite serving allow list.
+
+- C:/Users/quiro/OneDrive/html
+
+Refer to docs https://vite.dev/config/server-options.html#server-fs-allow for configurations and more details.
+
+The request url "C:\Users\quiro\OneDrive\html\.env.server.local" is outside of Vite serving allow list.

@@ -1,0 +1,40 @@
+0 verbose cli C:\Users\quiro\OneDrive\html\.tools\node\node-v24.22.3-win-x64\node.exe C:\Users\quiro\OneDrive\html\.tools\node\node-v24.22.3-win-x64\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.19.1
+2 info using node@v24.22.3
+3 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\node\node-v24.22.3-win-x64\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\browser-check\.npmrc
+5 silly config load:file:C:\Users\quiro\.npmrc
+6 silly config load:file:C:\Users\quiro\OneDrive\html\.tools\browser-check\etc\npmrc
+7 verbose title npm install playwright
+8 verbose argv "install" "--prefix" ".tools/browser-check" "--no-save" "--ignore-scripts" "playwright" "--no-fund" "--no-audit" "--cache" ".tools/npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Users\quiro\OneDrive\html\.tools\npm-cache\_logs\2026-11-11T17_21_30_188Z-
+10 verbose logfile C:\Users\quiro\OneDrive\html\.tools\npm-cache\_logs\2026-11-11T17_21_30_188Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly install-scripts no package.json at prefix Could not read package.json: Error: ENOENT: no such file or directory, open 'C:\Users\quiro\OneDrive\html\.tools\browser-check\package.json'
+13 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+14 silly idealTree buildDeps
+15 silly fetch manifest playwright@*
+16 silly packumentCache full:https://registry.npmjs.org/playwright cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/playwright 1619ms (cache revalidated)
+18 silly packumentCache full:https://registry.npmjs.org/playwright set size:17020305 disposed:false
+19 silly placeDep ROOT playwright@1.65.0 OK for:  want: *
+20 silly fetch manifest playwright-core@1.65.0
+21 silly packumentCache full:https://registry.npmjs.org/playwright-core cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/playwright-core 30337ms (cache miss)
+23 silly packumentCache full:https://registry.npmjs.org/playwright-core set size:undefined disposed:false
+24 silly placeDep ROOT playwright-core@1.65.0 OK for: playwright@1.65.0 want: 1.65.0
+25 silly reify moves {}
+26 http cache playwright-core@https://registry.npmjs.org/playwright-core/-/playwright-core-1.65.0.tgz 28ms (cache hit)
+27 http cache playwright@https://registry.npmjs.org/playwright/-/playwright-1.65.0.tgz 0ms (cache hit)
+28 silly tarball no local data for playwright-core@https://registry.npmjs.org/playwright-core/-/playwright-core-1.65.0.tgz. Extracting by manifest.
+29 silly tarball no local data for playwright@https://registry.npmjs.org/playwright/-/playwright-1.65.0.tgz. Extracting by manifest.
+30 http fetch GET 200 https://registry.npmjs.org/playwright/-/playwright-1.65.0.tgz 18848ms (cache miss)
+31 http fetch GET 200 https://registry.npmjs.org/playwright-core/-/playwright-core-1.65.0.tgz 59965ms (cache miss)
+32 silly ADD node_modules/playwright-core
+33 silly ADD node_modules/playwright
+34 verbose cwd C:\Users\quiro\OneDrive\html
+35 verbose os Windows_NT 10.0.26200
+36 verbose node v24.22.3
+37 verbose npm  v11.19.1
+38 verbose exit 0
+39 info ok

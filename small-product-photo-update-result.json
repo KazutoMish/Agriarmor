@@ -1,0 +1,30 @@
+[
+  {
+    "productId": "00000000-0000-4000-8000-000000000001",
+    "size": "250ml",
+    "name": "RedRevive Con · 250 ml",
+    "imageUrl": "https://nugxapjqwbkfhyymumrk.supabase.co/storage/v1/object/public/product-images/redrevive-250-hd-gconelbkefhk.png",
+    "previousImageUrl": "/assets/redrevive-250.jpg",
+    "localPath": "public/assets/redrevive-250-hd.png",
+    "width": 1254,
+    "height": 1254,
+    "exactPhotoVerified": true,
+    "publicCatalogVerified": true,
+    "priceUnchanged": true,
+    "stockUnchanged": true
+  },
+  {
+    "productId": "00000000-0000-4000-8000-000000000002",
+    "size": "500ml",
+    "name": "RedRevive Con · 500 ml",
+    "imageUrl": "https://nugxapjqwbkfhyymumrk.supabase.co/storage/v1/object/public/product-images/redrevive-500-hd-hagekapifclc.png",
+    "previousImageUrl": "/assets/redrevive-500.jpg",
+    "localPath": "public/assets/redrevive-500-hd.png",
+    "width": 1254,
+    "height": 1254,
+    "exactPhotoVerified": true,
+    "publicCatalogVerified": true,
+    "priceUnchanged": true,
+    "stockUnchanged": true
+  }
+]

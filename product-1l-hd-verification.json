@@ -1,0 +1,60 @@
+{
+  "imageUrl": "https://nugxapjqwbkfhyymumrk.supabase.co/storage/v1/object/public/product-images/redrevive-1000-pnplmlkfmffh.png",
+  "results": [
+    {
+      "width": 1440,
+      "path": "/products",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 1440,
+      "path": "/cart",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 1440,
+      "path": "/checkout",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/products",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/cart",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "path": "/checkout",
+      "naturalWidth": 1254,
+      "naturalHeight": 1254,
+      "objectFit": "contain",
+      "imageInsideContainer": true,
+      "noHorizontalOverflow": true
+    }
+  ],
+  "orderAttempts": 0
+}
