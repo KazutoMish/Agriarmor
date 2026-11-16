@@ -32,6 +32,13 @@ describe('checkout safeguards', () => {
     expect(checkoutSchema.safeParse({ ...checkout, fulfillment_type: 'pickup' }).success).toBe(false);
   });
 
+  it('requires a transfer reference only for GCash and bank transfer', () => {
+    expect(checkoutSchema.safeParse({ ...checkout, payment_method: 'gcash', payment_reference: '' }).success).toBe(false);
+    expect(checkoutSchema.safeParse({ ...checkout, payment_method: 'bank_transfer', payment_reference: 'TXN-12345' }).success).toBe(true);
+    expect(checkoutSchema.safeParse({ ...checkout, payment_method: 'gcash', payment_reference: 'TXN-12345' }).success).toBe(true);
+    expect(checkoutSchema.safeParse(checkout).success).toBe(true);
+  });
+
   it('rejects a filled honeypot and invalid optional email', () => {
     expect(checkoutSchema.safeParse({ ...checkout, website: 'https://spam.example' }).success).toBe(false);
     expect(checkoutSchema.safeParse({ ...checkout, email: 'not-an-email' }).success).toBe(false);

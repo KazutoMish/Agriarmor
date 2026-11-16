@@ -42,3 +42,16 @@ export async function uploadProof(order: Order, phone: string, file: File) {
     throw attached.error;
   }
 }
+export async function uploadCheckoutProof(requestId: string, phone: string, file: File): Promise<string> {
+  const db = client();
+  const { data, error } = await db.rpc('create_checkout_payment_proof_upload', { p_request_id: requestId, p_phone: phone });
+  if (error) throw error;
+  const path = (data as { path: string }).path;
+  const uploaded = await db.storage.from('payment-proofs').upload(path, file, { contentType: file.type, upsert: false });
+  const { data: ready, error: readyError } = await db.rpc('checkout_payment_proof_ready', {
+    p_request_id: requestId, p_phone: phone, p_path: path,
+  });
+  if (readyError) throw readyError;
+  if (!ready) throw uploaded.error || new Error('The receipt upload could not be verified. Please try again.');
+  return path;
+}

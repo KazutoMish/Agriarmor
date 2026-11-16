@@ -16,6 +16,7 @@ export const checkoutSchema = z.object({
   if (v.fulfillment_type === 'delivery' && v.address.length < 10) ctx.addIssue({ code: 'custom', path: ['address'], message: 'Enter your complete delivery address.' });
   if (v.fulfillment_type === 'delivery' && v.payment_method === 'pay_on_pickup') ctx.addIssue({ code: 'custom', path: ['payment_method'], message: 'Choose a delivery payment method.' });
   if (v.fulfillment_type === 'pickup' && v.payment_method === 'cod') ctx.addIssue({ code: 'custom', path: ['payment_method'], message: 'Choose pay on pickup instead.' });
+  if ((v.payment_method === 'gcash' || v.payment_method === 'bank_transfer') && !v.payment_reference) ctx.addIssue({ code: 'custom', path: ['payment_reference'], message: 'Enter the GCash or bank transfer reference.' });
 });
 export const cartSchema = z.array(z.object({ product_id: z.string().uuid(), quantity: z.number().int().min(1).max(99) })).max(30);
 export const promoCodeSchema = z.string().trim().max(32, 'Promo codes can have up to 32 characters.').refine(value => value === '' || /^[A-Za-z0-9_-]{3,32}$/.test(value), 'Enter a valid promo code.');

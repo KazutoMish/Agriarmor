@@ -29,8 +29,9 @@ The frontend can display a sample catalog when live configuration is unavailable
 1. Open the intended Supabase project. The included URL points to `nugxapjqwbkfhyymumrk`; use a different project by changing both environment variables.
 2. In **SQL Editor**, run the complete contents of `supabase/migrations/001_initial.sql` once. This creates the tables, constraints, RLS policies, order RPCs, and Storage buckets/policies. Review the SQL before applying it to a project that already has tables with these names.
 3. Run `supabase/seed.sql` to load the initial RedRevive product variants and promotional banner. No customer discount code is enabled by the seed.
-4. In **Authentication → Users**, create the owner's user with a strong password. Confirm the email or create it as confirmed. Keep public sign-ups disabled if customers do not need accounts.
-5. Copy that user's UUID, replace the example below, and run it in SQL Editor:
+4. Run each remaining migration in order. For an existing project that already has migrations `001` and `002`, apply `supabase/migrations/003_require_checkout_payment_proof.sql` before deploying this checkout.
+5. In **Authentication → Users**, create the owner's user with a strong password. Confirm the email or create it as confirmed. Keep public sign-ups disabled if customers do not need accounts.
+6. Copy that user's UUID, replace the example below, and run it in SQL Editor:
 
 ```sql
 update public.profiles
@@ -38,8 +39,8 @@ set role = 'admin'
 where id = 'YOUR_AUTH_USER_UUID'::uuid;
 ```
 
-6. Open `/admin`, sign in with the owner's email/password, and confirm that orders, product editing, promotions, and statistics load. Ordinary authenticated accounts without the `admin` role cannot use the dashboard data.
-7. In Authentication settings, set the deployed site URL and allowed redirect URLs for your domain. This app uses password sign-in rather than an OAuth redirect.
+7. Open `/admin`, sign in with the owner's email/password, and confirm that orders, product editing, promotions, and statistics load. Ordinary authenticated accounts without the `admin` role cannot use the dashboard data.
+8. In Authentication settings, set the deployed site URL and allowed redirect URLs for your domain. This app uses password sign-in rather than an OAuth redirect.
 
 The SQL files are deliverables; they are not automatically applied to your Supabase project by installing or running the frontend.
 
@@ -49,7 +50,7 @@ The storefront uses only `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`
 
 Saving these settings does not start a backend or create database tables. Checkout uses the existing Supabase RPCs, which must first be created by the migration using Supabase's SQL Editor, a connected Supabase integration, or a PostgreSQL connection. The project API secret is separate from the database password and Management API access token.
 
-After applying the migration and seed, run `supabase/tests/security.sql` in SQL Editor as `postgres` to exercise anonymous, customer, and admin access, pricing, stock, tracking, and Storage policies. The test uses a transaction and rolls its fixtures back. Alternatively, use a direct database connection from your own terminal:
+After applying all pending migrations and the seed, run `supabase/tests/security.sql` in SQL Editor as `postgres` to exercise anonymous, customer, and admin access, pricing, stock, tracking, and Storage policies. The test uses a transaction and rolls its fixtures back. Alternatively, use a direct database connection from your own terminal:
 
 ```sh
 psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f supabase/tests/security.sql
@@ -72,7 +73,7 @@ Set these optional environment variables to the owner's verified account details
 | `VITE_BANK_ACCOUNT_NUMBER` | Bank account number |
 | `VITE_WHATSAPP_NUMBER` | Optional WhatsApp destination, international digits only |
 
-Until account details are configured, checkout tells customers to contact AgriArmor for transfer instructions. Bank and GCash payment references are stored with the order. Payment proof images are optional, limited to JPG/PNG/WebP and 5 MB, and stored privately. Admins can view proofs using temporary signed URLs. Confirm transfers manually with your bank or GCash account.
+Until account details are configured, checkout tells customers to contact AgriArmor for transfer instructions before paying. GCash and bank-transfer orders require a transaction reference and a JPG/PNG/WebP receipt image (up to 5 MB) before submission. The receipt is uploaded privately before the order is committed; admins can view proofs using temporary signed URLs. Confirm transfers manually with your bank or GCash account.
 
 Delivery costs ₱60; a subtotal after discounts of at least ₱499 qualifies for free delivery. Pickup has no delivery fee. Keep the SQL pricing rule and the display helper in `src/lib/utils.ts` aligned when changing this policy. The database calculates the actual amounts from current product prices and valid promotions, so browser-side totals cannot override charges.
 
@@ -125,7 +126,7 @@ Official references: [Vite on Vercel](https://vercel.com/docs/frameworks/fronten
 
 ```text
 src/                 React pages, components, state, and Supabase client
-supabase/migrations/001_initial.sql  Database, RLS, RPCs, and Storage setup
+supabase/migrations/      Database schema and ordered updates
 supabase/seed.sql                    Initial catalog and banner
 supabase/tests/security.sql          Rollback-only database integration checks
 tests/               Checkout and cart input checks

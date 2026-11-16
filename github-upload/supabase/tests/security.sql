@@ -28,6 +28,8 @@ declare
   v_order jsonb;
   v_retried jsonb;
   v_tracking jsonb;
+  v_path text;
+  v_request_id uuid := '10000000-0000-4000-8000-000000000083';
   v_cart jsonb := '[{"product_id":"10000000-0000-4000-8000-000000000001","quantity":2}]';
   v_input jsonb := '{"client_request_id":"10000000-0000-4000-8000-000000000081","customer_name":"Security Test Customer","phone":"09123456001","fulfillment_type":"delivery","address":"100 Test Street, Manila","payment_method":"cod","subtotal":0,"total":0,"status":"completed"}';
 begin
@@ -111,32 +113,56 @@ begin
   exception when invalid_parameter_value then null; end;
   update agriarmor_test_context set delivery = v_order;
 
-  v_order := public.place_order(
-    '{"client_request_id":"10000000-0000-4000-8000-000000000082","customer_name":"Security Test Pickup","phone":"09123456002","fulfillment_type":"pickup","payment_method":"gcash","payment_reference":"TEST-REFERENCE"}',
-    '[{"product_id":"10000000-0000-4000-8000-000000000001","quantity":1}]'
-  );
-  if (v_order ->> 'total')::numeric <> 100 then raise exception 'FAIL: pickup total'; end if;
-  update agriarmor_test_context set pickup = v_order,
-    proof_path = public.create_payment_proof_upload(v_order ->> 'order_number', '09123456002') ->> 'path';
-  if not public.can_upload_payment_proof((select proof_path from agriarmor_test_context)) then
+  begin
+    perform public.place_order(
+      '{"client_request_id":"10000000-0000-4000-8000-000000000083","customer_name":"Security Test Transfer","phone":"09123456002","fulfillment_type":"pickup","payment_method":"gcash","payment_reference":"TEST-REFERENCE"}',
+      '[{"product_id":"10000000-0000-4000-8000-000000000001","quantity":1}]'
+    );
+    raise exception 'FAIL: GCash order accepted without a receipt';
+  exception when invalid_parameter_value then null; end;
+  begin
+    perform public.place_order(
+      '{"client_request_id":"10000000-0000-4000-8000-000000000084","customer_name":"Security Test Transfer","phone":"09123456002","fulfillment_type":"pickup","payment_method":"bank_transfer","payment_proof_path":"checkout/invalid"}',
+      '[{"product_id":"10000000-0000-4000-8000-000000000001","quantity":1}]'
+    );
+    raise exception 'FAIL: bank transfer order accepted without a reference';
+  exception when invalid_parameter_value then null; end;
+  begin
+    perform public.place_order(
+      '{"client_request_id":"10000000-0000-4000-8000-000000000085","customer_name":"Security Test Transfer","phone":"09123456002","fulfillment_type":"pickup","payment_method":"bank_transfer","payment_reference":"TEST-REFERENCE"}',
+      '[{"product_id":"10000000-0000-4000-8000-000000000001","quantity":1}]'
+    );
+    raise exception 'FAIL: bank transfer order accepted without a receipt';
+  exception when invalid_parameter_value then null; end;
+  v_path := public.create_checkout_payment_proof_upload(v_request_id, '09123456002') ->> 'path';
+  insert into storage.objects (bucket_id, name, metadata)
+  values ('payment-proofs', v_path, '{"mimetype":"image/png","size":100}'::jsonb);
+  if not public.checkout_payment_proof_ready(v_request_id, '09123456002', v_path)
+    or not public.can_upload_payment_proof(v_path) then
     raise exception 'FAIL: upload capability not issued';
   end if;
   if public.can_upload_payment_proof('not-an-issued-capability') then
     raise exception 'FAIL: arbitrary upload paths accepted';
   end if;
-  begin
-    perform public.attach_payment_proof(v_order ->> 'order_number', '09123456002', (select proof_path from agriarmor_test_context));
-    raise exception 'FAIL: nonexistent image accepted as payment proof';
-  exception when invalid_parameter_value then null; end;
+  v_order := public.place_order(
+    jsonb_build_object(
+      'client_request_id', v_request_id, 'customer_name', 'Security Test Pickup',
+      'phone', '09123456002', 'fulfillment_type', 'pickup',
+      'payment_method', 'gcash', 'payment_reference', 'TEST-REFERENCE',
+      'payment_proof_path', v_path
+    ),
+    '[{"product_id":"10000000-0000-4000-8000-000000000001","quantity":1}]'
+  );
+  if (v_order ->> 'total')::numeric <> 100 or not (v_order ->> 'has_payment_proof')::boolean then
+    raise exception 'FAIL: transfer order was not created with its verified receipt';
+  end if;
+  if public.can_upload_payment_proof(v_path) then raise exception 'FAIL: consumed checkout upload capability remains valid'; end if;
+  update agriarmor_test_context set pickup = v_order, proof_path = v_path;
   raise notice 'PASS: public RLS, server totals, promos, inventory, idempotency, tracking, honeypot, proof ownership';
 end;
 $$;
 
 reset role;
--- Simulate a Storage API upload's metadata. This test never writes a blob.
-insert into storage.objects (bucket_id, name, metadata)
-select 'payment-proofs', proof_path, '{"mimetype":"image/png","size":100}'::jsonb from agriarmor_test_context;
-
 set local role anon;
 do $$
 declare v_order jsonb; v_path text;
@@ -145,17 +171,10 @@ begin
   if exists (select 1 from storage.objects where bucket_id = 'payment-proofs' and name = v_path) then
     raise exception 'FAIL: anonymous users can read private proof metadata';
   end if;
-  if not public.attach_payment_proof(v_order ->> 'order_number', '09123456002', v_path) then
-    raise exception 'FAIL: valid proof not attached';
-  end if;
-  if not public.attach_payment_proof(v_order ->> 'order_number', '09123456002', v_path) then
-    raise exception 'FAIL: retrying a proof attachment is not idempotent';
-  end if;
-  if public.can_upload_payment_proof(v_path) then raise exception 'FAIL: attached upload capability still valid'; end if;
   if not (public.track_order(v_order ->> 'order_number', '09123456002') ->> 'has_payment_proof')::boolean then
-    raise exception 'FAIL: proof receipt missing from tracking';
+    raise exception 'FAIL: pre-uploaded receipt missing from order tracking';
   end if;
-  raise notice 'PASS: private proof access and single-use capability';
+  raise notice 'PASS: private proof access and verified checkout receipt';
 end;
 $$;
 

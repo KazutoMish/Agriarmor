@@ -35,7 +35,7 @@ try {
     alter default privileges in schema public grant all on tables to anon, authenticated;
     alter default privileges in schema public grant execute on functions to anon, authenticated;
   `);
-  for (const path of ['../migrations/001_initial.sql', '../seed.sql', './security.sql']) {
+  for (const path of ['../migrations/001_initial.sql', '../seed.sql', '../migrations/002_update_product_prices.sql', '../migrations/003_require_checkout_payment_proof.sql', './security.sql']) {
     await db.exec(await readFile(new URL(path, import.meta.url), 'utf8'));
     console.log(`PASS ${path}`);
   }
