@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Banknote, Building2, Check, ImagePlus, LoaderCircle, ShieldCheck, Smartphone, Store, Truck } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 import { cartSchema, checkoutSchema, proofSchema, promoCodeSchema } from '../lib/validation';
-import { getQuote, placeOrder, uploadCheckoutProof, uploadProof } from '../lib/api';
+import { getQuote, placeOrder, uploadCheckoutProof } from '../lib/api';
 import { errorMessage, formatMoney } from '../lib/utils';
 import PaymentInstructions from '../components/PaymentInstructions';
 import type { Order, PaymentMethod, Quote } from '../types';
